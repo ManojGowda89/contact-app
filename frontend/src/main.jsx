@@ -7,13 +7,13 @@ import { createBrowserRouter ,RouterProvider } from 'react-router-dom'
 import User from './comp/User'
 import Create from './comp/Create'
 import Update from './comp/Update'
-
+import Admin from './comp/Admin';
 
 const router = createBrowserRouter([
   {
   
     path :'/',
-    element:<User/>,
+    element:<Admin/>,
     errorElement :<h1>Error</h1>
 
 
@@ -26,6 +26,10 @@ const router = createBrowserRouter([
   path :'/update/:id',
   element:<Update/>,
    
+},
+{
+  path :"/user",
+  element:<User/>
 }
 ])
 

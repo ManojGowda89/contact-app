@@ -6,7 +6,7 @@ const cors = require('cors');
 const UserModel = require('./models/Users')
 // data base connection
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://127.0.0.1:27017/crud')
+mongoose.connect('mongodb+srv://manojgowdabr89:fkwvojrJ6gEnajK8@cluster0.lqo2toa.mongodb.net/crud')
 
 
 
@@ -25,7 +25,7 @@ app.get("/getdata/:id",(req,res) => {
 })
 app.put("/updatedata/:id", (req, res) =>{
     const id = req.params.id;
-     UserModel.findByIdAndUpdate({_id:id},{name:req.body.name,email:req.body.email,age:req.body.age}).then(result=> res.json(result)).catch((err)=> console.log(err));
+     UserModel.findByIdAndUpdate({_id:id},{name:req.body.name,email:req.body.email,mobileNo:req.body.mobileNo,designation:req.body.designation,selectedGender:req.body.selectedGender,course:req.body.course,createDate:req.body.createDate}).then(result=> res.json(result)).catch((err)=> console.log(err));
 
 })
 app.delete('/deletedata/:id', (req, res) => {
