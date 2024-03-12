@@ -6,7 +6,7 @@ const cors = require('cors');
 const UserModel = require('./models/Users')
 // data base connection
 const mongoose = require('mongoose');
-mongoose.connect('mongodb+srv://manojgowdabr89:fkwvojrJ6gEnajK8@cluster0.lqo2toa.mongodb.net/crud')
+mongoose.connect('mongodb://localhost:27017/crud')
 
 
 
