@@ -15,6 +15,13 @@ export default function User(){
     const [loading, setLoading] = useState(false);
 
     useEffect(()=>{
+      const login =localStorage.getItem("isLogin")
+      console.log(login)
+          if(!login){
+              window.location.href = "http://localhost:5173"
+          }
+      })
+    useEffect(()=>{
         axios.get('http://localhost:3000/').then((result)=>userfunctions(result.data)).catch((err)=>{console.log("Error")})
     },[])
 
@@ -64,7 +71,9 @@ export default function User(){
           <a className="nav-link" href="/user">Home</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/">Logout</a>
+        <Link className="nav-link" onClick={()=>{
+            localStorage.clear();
+          }} href="/">Logout</Link>
         </li>
       </ul>
     </div>
@@ -81,14 +90,12 @@ export default function User(){
 <tr>
                 <th>Id</th>
                 
-                <th>Name</th>
+                <th>First Name</th>
+                <th>LastName</th>
                 <th>Email</th>
-                <th>Mobile</th>
-                <th>Designation</th>
-                <th>Gender</th>
-                <th>Course</th>
-                <th>Date</th>
-                <th>Action</th>
+                <th>Phone Number</th>
+                <th>Company</th>
+                <th>Jobtitle</th>
               </tr>
 </thead>
 <tbody>
@@ -96,13 +103,12 @@ export default function User(){
     users.map((users)=>{
         return <tr>
             <td>{users._id}</td>
-            <td>{users.name}</td>
+            <td>{users.firstname}</td>
+            <td>{users.lastname}</td>
             <td>{users.email}</td>
-            <td>{users.mobileNo}</td>
-            <td>{users.designation}</td>
-            <td>{users.selectedGender}</td>
-            <td>{users.course}</td>
-            <td>{users.createDate}</td>
+            <td>{users.phonenumber}</td>
+            <td>{users.company}</td>
+            <td>{users.jobtitle}</td>
             <td>
             <Link to={`/update/${users._id}`} className="btn btn-primary">Update</Link>
              &nbsp;

@@ -3,10 +3,7 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT || 3000;
 const cors = require('cors');
-const UserModel = require('./models/Users')
-// data base connection
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/crud')
+const connectDB=require("mb64-connect")
 
 
 
@@ -15,6 +12,22 @@ mongoose.connect('mongodb://localhost:27017/crud')
 app.use(cors());
 app.use(express.json());
 
+connectDB("mongodb+srv://harirajh076:w4GAwJYtmgEsqsFM@cluster0.3wrkq.mongodb.net/contact")
+
+
+
+
+
+const UserModel = connectDB.validation("contact",{
+ 
+    firstname:String,
+    lastname:String,
+    email:String,
+    phonenumber:String,
+    company:String,
+    jobtitle:String
+
+})
 
 
 app.get("/getdata/:id",(req,res) => {
@@ -25,7 +38,8 @@ app.get("/getdata/:id",(req,res) => {
 })
 app.put("/updatedata/:id", (req, res) =>{
     const id = req.params.id;
-     UserModel.findByIdAndUpdate({_id:id},{name:req.body.name,email:req.body.email,mobileNo:req.body.mobileNo,designation:req.body.designation,selectedGender:req.body.selectedGender,course:req.body.course,createDate:req.body.createDate}).then(result=> res.json(result)).catch((err)=> console.log(err));
+    console.log(req.body)
+     UserModel.findByIdAndUpdate({_id:id},{firstname:req.body.firstname,lastname:req.body.lastname,email:req.body.email,phonenumber:req.body.phonenumber,company:req.body.company,jobtitle:req.body.jobtitle}).then(result=> res.json(result)).catch((err)=> console.log(err));
 
 })
 app.delete('/deletedata/:id', (req, res) => {
@@ -39,16 +53,9 @@ app.get('/', (req, res) => {
     UserModel.find({}).then((users) => res.json(users)).catch((err)=>res.json(err))
 })
 app.post("/createuser",(req,res) => {
+    console.log(req.body)
     UserModel.create(req.body).then(users=>res.json()).catch((err)=>res.json(err))
 })
-
-// {
-//     "name": "John Doe",
-//     "email": "john.doe@example.com",
-//     "password": "password123"
-// }
-
-
 
 
 

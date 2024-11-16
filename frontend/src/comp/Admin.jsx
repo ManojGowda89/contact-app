@@ -10,7 +10,7 @@ export default function Admin() {
   function submitHandler(e) {
     e.preventDefault();
     if (username === 'admin' && password === 'admin') {
-    
+    localStorage.setItem("isLogin",true)
       setLoggedIn(true);
     } else {
       document.querySelector('#log').textContent = 'Check the password or username';

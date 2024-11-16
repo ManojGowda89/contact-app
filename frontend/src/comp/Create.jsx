@@ -1,15 +1,17 @@
 
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import axios from "axios"
+import { Link } from "react-router-dom";
 export default function Create() {
 
-    const [name, setName] = useState("");
+  
+    const [firstname, setfirstname] = useState("");
+    const [lastname, setlastname] = useState("");
     const [email, setEmail] = useState("");
-    const [mobileNo, setMobileNo] = useState("");
-    const [designation, setDesignation] = useState("");
-    const [selectedGender, setSelectedGender] = useState("");
-    const [course, setCourse] = useState("");
-    const [createDate, setCreateDate] = useState("");
+    const [phonenumber, setphonenumber] = useState("");
+    const [company, setcompany] = useState("");
+    const [jobtitle, setjobtitle] = useState("");
+   
 
     const [loading, setLoading] = useState(false);
 
@@ -18,14 +20,20 @@ export default function Create() {
 
         setLoading(true)
         setTimeout(() => {
-            axios.post('http://localhost:3000/createuser', { name, email, mobileNo, designation, selectedGender, course, createDate }).then((result) => { console.log(result) }).catch((err) => { console.log(err) })
+            axios.post('http://localhost:3000/createuser', { firstname, lastname, email, phonenumber, company, jobtitle }).then((result) => { console.log(result) }).catch((err) => { console.log(err) })
 
             window.location.href = "http://localhost:5173/user"
 
         }, 2000);
 
     }
-
+    useEffect(()=>{
+        const login =localStorage.getItem("isLogin")
+        console.log(login)
+            if(!login){
+                window.location.href = "http://localhost:5173"
+            }
+        })
     const styles = {
         display: "flex",
         justifyContent: "center",
@@ -58,7 +66,9 @@ export default function Create() {
           <a className="nav-link" href="/user">Home</a>
         </li>
         <li className="nav-item">
-          <a className="nav-link" href="/">Logout</a>
+        <Link className="nav-link" onClick={()=>{
+            localStorage.clear();
+          }} href="/">Logout</Link>
         </li>
       </ul>
     </div>
@@ -70,10 +80,16 @@ export default function Create() {
                 <h1 className="text-center mb-4">Create New User</h1>
                 <form onSubmit={handelsubmit}>
                     <div className="mb-3">
-                        <label htmlFor="name" className="form-label">Name</label>
+                        <label htmlFor="FirstName" className="form-label">First Name</label>
                         <input onChange={(e) => {
-                            setName(e.target.value)
-                        }} type="text" className="form-control" id="name" placeholder="Enter your name" required />
+                            setfirstname(e.target.value)
+                        }} type="text" className="form-control" id="FirstName" placeholder="Enter your FirstName" required />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="LastName" className="form-label">Last Name</label>
+                        <input onChange={(e) => {
+                            setlastname(e.target.value)
+                        }} type="text" className="form-control" id="LastName" placeholder="Enter your Girl friend name" required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email</label>
@@ -84,7 +100,7 @@ export default function Create() {
                     <div className="mb-3">
                         <label htmlFor="mobileNo" className="form-label">Mobile No</label>
                         <input
-                            onChange={(e) => setMobileNo(e.target.value)}
+                            onChange={(e) => setphonenumber(e.target.value)}
                             type="text"
                             className="form-control"
                             id="mobileNo"
@@ -92,83 +108,28 @@ export default function Create() {
                             required
                         />
                     </div>
-
                     <div className="mb-3">
-                        <label htmlFor="designation" className="form-label">Designation</label>
-                        <select
-                            onChange={(e) => setDesignation(e.target.value)}
-                            className="form-select"
-                            id="designation"
-                            required
-                        >
-                            <option value="" disabled selected>Select your designation</option>
-                            <option value="HR">HR</option>
-                            <option value="Sales Manager">Sales Manager</option>
-                        </select>
-                    </div>
-
-
-
-                    <div className="mb-3">
-                        <label className="form-label">Gender</label>
-                        <div className="form-check">
-                            <input
-                                className="form-check-input"
-                                type="radio"
-                                name="gender"
-                                id="male"
-                                value="Male"
-                                checked={selectedGender === "Male"}
-                                onChange={() => setSelectedGender("Male")}
-                            />
-                            <label className="form-check-label" htmlFor="male">
-                                Male
-                            </label>
-                        </div>
-                        <div className="form-check">
-                            <input
-                                className="form-check-input"
-                                type="radio"
-                                name="gender"
-                                id="female"
-                                value="Female"
-                                checked={selectedGender === "Female"}
-                                onChange={() => setSelectedGender("Female")}
-                            />
-                            <label className="form-check-label" htmlFor="female">
-                                Female
-                            </label>
-                        </div>
-                    </div>
-
-                    <div className="mb-3">
-                        <label htmlFor="course" className="form-label">Course</label>
-                        <select
-                            onChange={(e) => setCourse(e.target.value)}
-                            className="form-select"
-                            id="course"
-                            required
-                        >
-                            <option value="" disabled selected>Select your course</option>
-                            <option value="MCA">MCA</option>
-                            <option value="BCA">BCA</option>
-                            <option value="BSE">BSE</option>
-                        </select>
-                    </div>
-
-
-                    <div className="mb-3">
-                        <label htmlFor="createDate" className="form-label">Create date</label>
+                        <label htmlFor="text" className="form-label">Company</label>
                         <input
-                            onChange={(e) => setCreateDate(e.target.value)}
-                            type="date"
+                            onChange={(e) => setcompany(e.target.value)}
+                            type="text"
                             className="form-control"
-                            id="createDate"
-                            placeholder="Enter create date"
+                            id="mobileNo"
+                            placeholder="Enter your Company"
                             required
                         />
                     </div>
-
+                    <div className="mb-3">
+                        <label htmlFor="text" className="form-label">Job Title</label>
+                        <input
+                            onChange={(e) => setjobtitle(e.target.value)}
+                            type="text"
+                            className="form-control"
+                            id="mobileNo"
+                            placeholder="Enter your Job title"
+                            required
+                        />
+                    </div>
 
 
                     <button type="submit" className="btn btn-primary">Create</button>
