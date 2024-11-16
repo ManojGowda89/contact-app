@@ -12,7 +12,7 @@ const connectDB=require("mb64-connect")
 app.use(cors());
 app.use(express.json());
 
-connectDB("mongodb+srv://harirajh076:w4GAwJYtmgEsqsFM@cluster0.3wrkq.mongodb.net/contact")
+connectDB("your mongodb url")
 
 
 
