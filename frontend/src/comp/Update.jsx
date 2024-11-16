@@ -118,7 +118,7 @@ if(loading){
                         <label htmlFor="LastName" className="form-label">Last Name</label>
                         <input onChange={(e) => {
                             setlastname(e.target.value)
-                        }} type="text" className="form-control" id="LastName" value={lastname} placeholder="Enter your Girl friend name" required />
+                        }} type="text" className="form-control" id="LastName" value={lastname} placeholder="Enter your Lastname" required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email</label>

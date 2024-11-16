@@ -89,7 +89,7 @@ export default function Create() {
                         <label htmlFor="LastName" className="form-label">Last Name</label>
                         <input onChange={(e) => {
                             setlastname(e.target.value)
-                        }} type="text" className="form-control" id="LastName" placeholder="Enter your Girl friend name" required />
+                        }} type="text" className="form-control" id="LastName" placeholder="Enter your LastName" required />
                     </div>
                     <div className="mb-3">
                         <label htmlFor="email" className="form-label">Email</label>
